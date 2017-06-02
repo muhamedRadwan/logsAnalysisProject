@@ -1,0 +1,9 @@
+body{
+    font-size: 25px;
+}
+.form-horizontal .radio{
+    margin: 15px auto;
+}
+.btn-toolbar {
+    margin: 16px auto;
+}
