@@ -1,5 +1,9 @@
 # Logs Analysis Project
 
+## Run IT !
+add all files in the same dirctory in your vm then write in command line 
+`python main.py` <br>
+then enter to 127.0.0.1:8080 by your browser
 
 
 
