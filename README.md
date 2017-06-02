@@ -1,19 +1,23 @@
 # Logs Analysis Project
 
 ## Run IT !
-add all files in the same dirctory in your vm then write in command line 
+### First install this modules
+webapp2, paste, and webob
+by **pip**:<br>
+   1. `pip install webapp2`
+   1. `pip install paste`
+   1. `pip install webob`<br>
+Add all files in the same dirctory in your vm then write in command line
 `python main.py` <br>
-then enter to 127.0.0.1:8080 by your browser
-
-
+Then enter to **127.0.0.1:8080** by your browser
 
 
 
 ## views that I created
     create view numOFaccessArticales as 
-    select path , count(path) as num from log  where path = path and 
+    select replace(path,'/article/','') as slug, count(path) as num from log  where path = path and 
     status = '200 OK'  and path like '/article%'
-    group by path 
+    group by path ;
 
     create view WriterOFArticle as 
     select t.slug,a.name from authors as a , articles as t
