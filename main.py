@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import sys
 import webapp2
 import jinja2
 import os
@@ -59,12 +59,23 @@ class MainHandler(Handler):
 
 def select_query(query):
     """Return all posts from the 'database', most recent first."""
-    conn = psycopg2.connect("dbname=news")
-    cu = conn.cursor()
-    cu.execute(query)
-    rows = cu.fetchall()
-    conn.close()
+    db, c = connect()
+    c.execute(query)
+    rows = c.fetchall()
+    db.close()
     return rows
+
+
+def connect(database_name="news"):
+    """Connect to the PostgreSQL database.  Returns a database connection."""
+    try:
+        db = psycopg2.connect("dbname={}".format(database_name))
+        c = db.cursor()
+        return db, c
+    except psycopg2.Error as e:
+        print "Unable to connect to database"
+        # THEN perhaps exit the program
+        sys.exit(1)  # The easier method
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
